@@ -1,9 +1,19 @@
 import re
 import csv
+import tkinter as tk
+from tkinter import filedialog
 
+#Asking the user for file
+root = tk.Tk()
+root.withdraw()
 
-xfile = open("data\DC20220114215917.txt")
+file_path = filedialog.askopenfilename()
 
+print(file_path)
+
+xfile = open(file_path)
+
+#Main Program
 fh = xfile
 customers = list()
 dte = list()
@@ -22,6 +32,8 @@ for line in fh:
             customers.append(words[2])
         if word == "Σύνολο":
             money.append(words[2])
+        #if word == "Μετρητά":
+
 for line in data:
 
     if len(line) < 1:
@@ -37,12 +49,15 @@ print("Customers:", customers[0])
 print("income:", money[0])
 
 print("expenses:", money[1])
+
+
+
 xfile.close()
 products = list()
 quantitys = list()
 values = list()
 
-with open('data\DC20220114215917.txt', 'r') as current:
+with open(file_path, 'r') as current:
     content = current.readlines()
     c = content[i:]
     for line in c:
@@ -57,3 +72,8 @@ with open('data\DC20220114215917.txt', 'r') as current:
             products.append(" ".join(q))
         else:
             continue
+print("____________________________________")
+zip(products, quantitys, values)
+for (i,g,k) in zip(products, quantitys, values):
+    print(i,g,k)
+input('press any key to exit ')
