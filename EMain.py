@@ -19,6 +19,8 @@ customers = list()
 dte = list()
 money = list()
 data = list()
+cash = list()
+card = list()
 i=1
 for line in fh:
     words = line.split()
@@ -32,8 +34,10 @@ for line in fh:
             customers.append(words[2])
         if word == "Σύνολο":
             money.append(words[2])
-        #if word == "Μετρητά":
-
+        if word == "Μετρητά":
+            cash.append(words[1])
+        if word == "ΠΙΣΤΩΤΙΚΗ":
+            card.append(words[1])
 for line in data:
 
     if len(line) < 1:
@@ -50,7 +54,11 @@ print("income:", money[0])
 
 print("expenses:", money[1])
 
+cs = cash[0]
+print("cash:", cs)
 
+cc = card[0]
+print("credit card:", cc)
 
 xfile.close()
 products = list()
@@ -72,8 +80,8 @@ with open(file_path, 'r') as current:
             products.append(" ".join(q))
         else:
             continue
-print("____________________________________")
-zip(products, quantitys, values)
-for (i,g,k) in zip(products, quantitys, values):
-    print(i,g,k)
+#print("____________________________________")
+#zip(products, quantitys, values)
+#for (i,g,k) in zip(products, quantitys, values):
+#    print(i,g,k)
 input('press any key to exit ')
