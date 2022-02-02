@@ -2,6 +2,7 @@ import re
 import csv
 import tkinter as tk
 from tkinter import filedialog
+from datetime import datetime
 
 #Asking the user for file
 root = tk.Tk()
@@ -62,7 +63,7 @@ print("credit card:", cc)
 
 xfile.close()
 products = list()
-quantitys = list()
+quantities = list()
 values = list()
 
 with open(file_path, 'r') as current:
@@ -74,14 +75,28 @@ with open(file_path, 'r') as current:
         temp = len(words)-3
         if len(words)-1 > 0:
             values.append(words[len(words)-1])
-            quantitys.append(words[len(words)-2])
+            quantities.append(words[len(words)-2])
             q.pop(len(words)-1)
             q.pop(len(words)-1)
             products.append(" ".join(q))
         else:
             continue
-#print("____________________________________")
-#zip(products, quantitys, values)
-#for (i,g,k) in zip(products, quantitys, values):
-#    print(i,g,k)
+print("____________________________________")
+zip(products, quantities, values)
+for (i,g,k) in zip(products, quantities, values):
+    print(i,g,k)
+
+#print(float(money[0].replace(',','.')))
+
+#dte = date.strptime(x[0], '%d %b %Y')
+#print(" ".join(x))
+
+
+
+
+
+
+
+
+
 input('press any key to exit ')
