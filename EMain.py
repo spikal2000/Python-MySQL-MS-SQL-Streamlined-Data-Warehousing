@@ -86,10 +86,24 @@ zip(products, quantities, values)
 for (i,g,k) in zip(products, quantities, values):
     print(i,g,k)
 
-#print(float(money[0].replace(',','.')))
 
-#dte = date.strptime(x[0], '%d %b %Y')
-#print(" ".join(x))
+#----parse string to float number before insert the values in mysql DB----
+#print(float(money[0].replace(',','.')))
+datedtr = " ".join(x)
+date_time = datetime.strptime(datedtr, '%d.%m.%Y %H:%M:%S')  # DATE
+income = float(money[0].replace(',', '.')) # INCOME
+expenses = float(money[1].replace(',', '.')) # EXPENSES
+i_cash = float(cs.replace(',', '.')) # CASH
+credit_card = float(cc.replace(',', '.')) # CREDIT CARD
+
+quantities_num = list() # QUANTITY
+for quantity in quantities:
+    quantities_num.append(float(quantity.replace(',', '.')))
+
+values_num = list() # VALUES
+for value in values:
+    values_num.append(float(value.replace(',', '.')))
+
 
 
 
