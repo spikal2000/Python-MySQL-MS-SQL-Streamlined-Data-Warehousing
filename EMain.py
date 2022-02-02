@@ -90,6 +90,7 @@ for (i,g,k) in zip(products, quantities, values):
 
 #----parse strings to float numbers and date to DateTime before insert the values in mysql DB----
 #print(float(money[0].replace(',','.')))
+branch = "Ελληνικό"
 datedtr = " ".join(x)
 date_time = datetime.strptime(datedtr, '%d.%m.%Y %H:%M:%S')  # DATE
 income = float(money[0].replace(',', '.')) # INCOME
@@ -117,41 +118,84 @@ print(mydb)
 
 mycursor = mydb.cursor()
 
-mycursor.execute(" CREATE DATABASE IF NOT EXISTS `mainDB` ")
+mycursor.execute(" CREATE DATABASE IF NOT EXISTS `maindb` ")
 
 mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `mainDB`.`products` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(500) NOT NULL,
-    `quantity` FLOAT NOT NULL,
-    `value` FLOAT NOT NULL,
-    PRIMARY KEY (`id`));
+    CREATE TABLE IF NOT EXISTS `maindb`.`products` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(500) NULL,
+  `quantity` FLOAT NULL,
+  `value` FLOAT NULL,
+  PRIMARY KEY (`id`));
+
 
 """)
 
 mycursor.execute("""
 
-CREATE TABLE IF NOT EXISTS `mainDB`.`sales` (
+CREATE TABLE IF NOT EXISTS `maindb`.`sales` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `branch` VARCHAR(500) NOT NULL,
-  `Date` DATETIME NOT NULL,
-  `income` FLOAT NOT NULL,
-  `expenses` FLOAT NOT NULL,
-  `cash` FLOAT NOT NULL,
-  `creditCard` FLOAT NOT NULL,
+  `branch` VARCHAR(500) NULL,
+  `date` DATETIME NULL,
+  `income` FLOAT NULL,
+  `expenses` FLOAT NULL,
+  `cash` FLOAT NULL,
+  `creditCard` FLOAT NULL,
+  PRIMARY KEY (`id`));
+
+
+""")
+
+mycursor.execute("""
+
+CREATE TABLE IF NOT EXISTS `maindb`.`productdetails` (
+  `sales_id` INT NOT NULL,
   `product_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `FK_sales_products_id__products_id_idx` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `FK_sales_products_id__products_id`
+  INDEX `FK_sales_id__productDetails_sales_id_idx` (`sales_id` ASC) VISIBLE,
+  INDEX `FK_products_id__products_id_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `FK_sales_id__productDetails_sales_id`
+    FOREIGN KEY (`sales_id`)
+    REFERENCES `maindb`.`sales` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_products_id__products_id`
     FOREIGN KEY (`product_id`)
-    REFERENCES `test`.`products` (`id`)
+    REFERENCES `maindb`.`products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 """)
 
+mycursor.execute("""
+    INSERT INTO `maindb`.`sales`(`branch`, `Date`, `income`, `expenses`,
+    `cash`, `creditCard`)
+    VALUES(%s, %s, %s, %s, %s, %s)
+""", (branch, date_time, income, expenses, i_cash, credit_card))
+mydb.commit()
 
+sales_id = mycursor.lastrowid
+
+for i in range(len(products)):
+    #print(products[i], quantities_num[i], values_num[i])
+
+    name1 = products[i]
+    quantity1 = quantities_num[i]
+    value1 = values_num[i]
+
+    mycursor.execute("""
+        INSERT INTO `maindb`.`products`(`name`, `quantity`, `value`)
+        VALUES (%s, %s, %s); """, (name1, quantity1, value1) )
+
+    mydb.commit()
+    product_id = mycursor.lastrowid
+    mycursor.execute("""
+
+        INSERT INTO `maindb`.`productdetails`(`sales_id`, `product_id`)
+        VALUES ( %s, %s )
+
+        """, (sales_id, product_id))
+    mydb.commit()
 
 
 
