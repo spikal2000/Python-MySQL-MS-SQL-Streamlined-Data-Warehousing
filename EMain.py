@@ -109,32 +109,31 @@ for value in values:
 
 #_______________________DataBase Connection_______________________
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="dev123"
+  host="139.162.151.111",
+  user="kalogeri_spyros",
+  password="vaggosspyros1997"
 )
 
 print(mydb)
 
 mycursor = mydb.cursor()
 
-mycursor.execute(" CREATE DATABASE IF NOT EXISTS `maindb` ")
 
 mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `maindb`.`products` (
+    CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(500) NULL,
   `quantity` FLOAT NULL,
   `value` FLOAT NULL,
-  PRIMARY KEY (`id`));
-
-
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = greek;
 """)
 
 mycursor.execute("""
 
-CREATE TABLE IF NOT EXISTS `maindb`.`sales` (
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`sales` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `branch` VARCHAR(500) NULL,
   `date` DATETIME NULL,
@@ -142,33 +141,39 @@ CREATE TABLE IF NOT EXISTS `maindb`.`sales` (
   `expenses` FLOAT NULL,
   `cash` FLOAT NULL,
   `creditCard` FLOAT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = greek;
 
 
 """)
 
 mycursor.execute("""
 
-CREATE TABLE IF NOT EXISTS `maindb`.`productdetails` (
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`productDetails` (
   `sales_id` INT NOT NULL,
   `product_id` INT NOT NULL,
-  INDEX `FK_sales_id__productDetails_sales_id_idx` (`sales_id` ASC) VISIBLE,
-  INDEX `FK_products_id__products_id_idx` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `FK_sales_id__productDetails_sales_id`
+  INDEX `FK_sales_id__productDeatils_sales_id_idx` (`sales_id` ASC),
+  INDEX `FK_products_id__productDetails_products_id_idx` (`product_id` ASC),
+  CONSTRAINT `FK_sales_id__productDeatils_sales_id`
     FOREIGN KEY (`sales_id`)
-    REFERENCES `maindb`.`sales` (`id`)
+    REFERENCES `kalogeri_maindb`.`sales` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_products_id__products_id`
+  CONSTRAINT `FK_products_id__productDetails_products_id`
     FOREIGN KEY (`product_id`)
-    REFERENCES `maindb`.`products` (`id`)
+    REFERENCES `kalogeri_maindb`.`products` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = greek;
+
+
 
 """)
 
 mycursor.execute("""
-    INSERT INTO `maindb`.`sales`(`branch`, `Date`, `income`, `expenses`,
+    INSERT INTO `kalogeri_maindb`.`sales`(`branch`, `Date`, `income`, `expenses`,
     `cash`, `creditCard`)
     VALUES(%s, %s, %s, %s, %s, %s)
 """, (branch, date_time, income, expenses, i_cash, credit_card))
@@ -184,14 +189,14 @@ for i in range(len(products)):
     value1 = values_num[i]
 
     mycursor.execute("""
-        INSERT INTO `maindb`.`products`(`name`, `quantity`, `value`)
+        INSERT INTO `kalogeri_maindb`.`products`(`name`, `quantity`, `value`)
         VALUES (%s, %s, %s); """, (name1, quantity1, value1) )
 
     mydb.commit()
     product_id = mycursor.lastrowid
     mycursor.execute("""
 
-        INSERT INTO `maindb`.`productdetails`(`sales_id`, `product_id`)
+        INSERT INTO `kalogeri_maindb`.`productDetails`(`sales_id`, `product_id`)
         VALUES ( %s, %s )
 
         """, (sales_id, product_id))

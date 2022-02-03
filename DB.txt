@@ -1,15 +1,17 @@
 ---------------PRODUCTS TABLE-----------------
-CREATE TABLE `maindb`.`products` (
+    CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(500) NULL,
   `quantity` FLOAT NULL,
   `value` FLOAT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = greek;
 
 
 
 --------------SALES TABLE--------------------
-CREATE TABLE `maindb`.`sales` (
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`sales` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `branch` VARCHAR(500) NULL,
   `date` DATETIME NULL,
@@ -17,25 +19,29 @@ CREATE TABLE `maindb`.`sales` (
   `expenses` FLOAT NULL,
   `cash` FLOAT NULL,
   `creditCard` FLOAT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = greek;
 
 
 -------------------ProductDetails--------------
-CREATE TABLE `maindb`.`productdetails` (
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`productDetails` (
   `sales_id` INT NOT NULL,
   `product_id` INT NOT NULL,
-  INDEX `FK_sales_id__productDetails_sales_id_idx` (`sales_id` ASC) VISIBLE,
-  INDEX `FK_products_id__products_id_idx` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `FK_sales_id__productDetails_sales_id`
+  INDEX `FK_sales_id__productDeatils_sales_id_idx` (`sales_id` ASC),
+  INDEX `FK_products_id__productDetails_products_id_idx` (`product_id` ASC),
+  CONSTRAINT `FK_sales_id__productDeatils_sales_id`
     FOREIGN KEY (`sales_id`)
-    REFERENCES `maindb`.`sales` (`id`)
+    REFERENCES `kalogeri_maindb`.`sales` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_products_id__products_id`
+  CONSTRAINT `FK_products_id__productDetails_products_id`
     FOREIGN KEY (`product_id`)
-    REFERENCES `maindb`.`products` (`id`)
+    REFERENCES `kalogeri_maindb`.`products` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = greek;
 
 
 
