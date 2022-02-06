@@ -173,6 +173,20 @@ CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`productDetails` (
 """)
 
 mycursor.execute("""
+
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`Dproduct_id` (
+  `product_id` INT NOT NULL);
+
+""")
+
+mycursor.execute("""
+
+CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`Dsales_id` (
+  `sales_id` INT NOT NULL);
+
+""")
+
+mycursor.execute("""
     INSERT INTO `kalogeri_maindb`.`sales`(`branch`, `Date`, `income`, `expenses`,
     `cash`, `creditCard`)
     VALUES(%s, %s, %s, %s, %s, %s)
@@ -181,6 +195,13 @@ mydb.commit()
 
 sales_id = mycursor.lastrowid
 
+mycursor.execute("""
+
+    INSERT INTO `kalogeri_maindb`.`Dsales_id`(`sales_id`)
+    VALUES ( %s )
+
+""",(sales_id,))
+mydb.commit()
 for i in range(len(products)):
     #print(products[i], quantities_num[i], values_num[i])
 
@@ -202,8 +223,13 @@ for i in range(len(products)):
         """, (sales_id, product_id))
     mydb.commit()
 
+    mycursor.execute("""
 
+        INSERT INTO `kalogeri_maindb`.`Dproduct_id`(`product_id`)
+        VALUES ( %s )
 
+    """,(product_id,))
+    mydb.commit()
 
 
 

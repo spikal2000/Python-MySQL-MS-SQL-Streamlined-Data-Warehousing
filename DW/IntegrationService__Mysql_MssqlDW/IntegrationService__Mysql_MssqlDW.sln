@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1778
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "IntegrationService__Mysql_MssqlDW", "IntegrationService__Mysql_MssqlDW\IntegrationService__Mysql_MssqlDW.dtproj", "{96A1A2A9-90BC-4132-B2A2-8E52F658E9EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96A1A2A9-90BC-4132-B2A2-8E52F658E9EF}.Development|Default.ActiveCfg = Development
+		{96A1A2A9-90BC-4132-B2A2-8E52F658E9EF}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDE84272-B531-45D5-986A-BA338452FA8D}
+	EndGlobalSection
+EndGlobal
