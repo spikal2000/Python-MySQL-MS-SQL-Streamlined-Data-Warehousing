@@ -10,6 +10,7 @@ import mysql.connector
 
 root = Tk()
 root.geometry("500x300")
+root.title("DataCollect")
 
 def ellhniko():
     global branch
