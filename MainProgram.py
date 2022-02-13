@@ -86,7 +86,7 @@ def start(branch, file_path):
                 money.append(words[2])
             if word == "Μετρητά":
                 cash.append(words[1])
-            if word == "ΠΙΣΤΩΤΙΚΗ":
+            if (word == "ΠΙΣΤΩΤΙΚΗ" or word == "ΚΑΡΤΑ"):
                 card.append(words[1])
     for line in data:
 
@@ -108,6 +108,7 @@ def start(branch, file_path):
     print("cash:", cs)
 
     cc = card[0]
+    #print(len(card))
     print("credit card:", cc)
 
     xfile.close()
@@ -157,7 +158,7 @@ def start(branch, file_path):
 
     #_______________________DataBase Connection_______________________
     mydb = mysql.connector.connect(
-      host="139.162.151.111",
+      host="ns1.eude1.armadaservers.com",
       user="kalogeri_spyros",
       password="vaggosspyros1997"
     )
