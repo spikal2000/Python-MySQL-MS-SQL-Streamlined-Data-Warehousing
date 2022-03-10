@@ -11,8 +11,8 @@
   DTS:LocaleID="1032"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{7AD6845E-60A5-4BDE-A928-1008EE9BDB41}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{EBF3C72B-68BA-4BE2-B4C3-3D345A06C7FB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWP2X7iPw9E2xV94uRtFcPAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACmKpzgjU3QwW2KbHYC8KVPvRVrm9x+IT8j/QQ1gvPBuwAAAAAOgAAAAAIAACAAAACMC8JvCTsh/UsyW6fV9oGxrluCY7fi+lB00nxR4FhRiTAAAACv/bvo1mlyYsMEO+HxE8r6FRv7ezekokQ1T6NV8LXjEn7yHwtflSUAVZBwBTTjv1hAAAAA/TGjDknHdbSvU1TuxFROC509yOyJ56VqJAUs0Sa6dDR5lKdFAsFGE7q5+SsLPi4dgoAGexWF43ZOyphLoSh6aw</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWP2X7iPw9E2xV94uRtFcPAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAD2NvpXlE96P26innvX0WVSIuyf7/VcUmM8JwTJmSXAhQAAAAAOgAAAAAIAACAAAABQudgSCaty00ZjfBzH18sLuukNSyZm0gWd4mVphWZONTAAAAAHtWoP414nSqXCI5AtC0v7iL61PslXFoiZj8EmKQQvXSTRODIuMqBOnmEb3qaX/BpAAAAAf3aAdiz4RQyvCfTHSqv05b+vKrvzznTBAWbO8mxjid3yZ5zIs1EHQ6EhjeXaFU+Rz1y6poaFgYxqw20DqC++Jg</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -41,6 +41,21 @@
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=DESKTOP-RE433V8;Initial Catalog=kalogerisDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.maindb.root]"
+      DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=8.0.28.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
+      DTS:DTSID="{603B4004-158A-462D-980A-6E9411BC2B03}"
+      DTS:ObjectName="localhost.maindb.root">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=localhost;user id=root;database=maindb;">
+          <DTS:Password
+            DTS:Name="password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWP2X7iPw9E2xV94uRtFcPAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABnee8TrNw5Frjekb4wmRfTeJ7jrZxeCoXrSxORRVdEGwAAAAAOgAAAAAIAACAAAABW8SdjxEBra4xM8IfgEof+taZTbVNKyFH1miZqSUuajBAAAADBwkO4VOF757nwFtneyJN9QAAAAMvDa/nYCHFsEpCzsSvagK16RVD9WX57umJqJjs0/OLbZIojaC68M9qvbUqC27JOyD+PcR1c9TBdzFu3AHem0mE</DTS:Password>
+        </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -59,8 +74,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{5006F000-998C-4AC6-822F-5DC1973D7ABB}"
-          SQLTask:SqlStatementSource="USE kalogeri_maindb;&#xA;DELETE FROM productDetails WHERE product_id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM products WHERE id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM sales WHERE id IN (SELECT sales_id FROM Dsales_id) ;&#xA;TRUNCATE TABLE Dproduct_id;&#xA;TRUNCATE TABLE Dsales_id;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{603B4004-158A-462D-980A-6E9411BC2B03}"
+          SQLTask:SqlStatementSource="USE maindb;&#xA;DELETE FROM productDetails WHERE product_id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM products WHERE id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM sales WHERE id IN (SELECT sales_id FROM Dsales_id) ;&#xA;TRUNCATE TABLE Dproduct_id;&#xA;TRUNCATE TABLE Dsales_id;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -118,8 +133,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Source_productDetails.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
-                  connectionManagerRefId="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -232,8 +247,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Source_products.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
-                  connectionManagerRefId="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -385,8 +400,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Source_sales.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
-                  connectionManagerRefId="Package.ConnectionManagers[139.162.151.111.kalogeri_maindb.kalogeri_spyros]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -571,7 +586,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName">[stagingSales]</property>
+                  name="BulkInsertTableName">[dbo].[stagingSales]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -988,7 +1003,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="FACT table products"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1005,7 +1020,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="FACT TABLE sales"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1039,7 +1054,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="UPDATE branch"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1073,7 +1088,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="UPDATE productName"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1169,9 +1184,33 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\CLEAR MYSQL DB"
+          TopLeft="361.111117260797,425.686280479893" />
+        <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
           TopLeft="361.428577583664,15.4640525044592" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\FACT table products"
+          TopLeft="49.2063500443284,254.052291144687" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\FACT TABLE sales"
+          TopLeft="614.285724746938,256.601310788279" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\TRUNCATE Staging tbales"
+          TopLeft="335.714291431466,340.810461186574" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\UPDATE branch"
+          TopLeft="616.666677168438,112.156864318056" />
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\UPDATE productDetails"
+          TopLeft="344.444450310299,180.130721480514" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\UPDATE productName"
@@ -1210,10 +1249,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="173.6,41.6"
-          Id="Package\FACT table products"
-          TopLeft="49.2063500443284,254.052291144687" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="134.35714371472,155.031374139852">
@@ -1236,10 +1271,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\UPDATE branch"
-          TopLeft="616.666677168438,112.156864318056" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="472.228577583664,57.0640525044592">
@@ -1274,10 +1305,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\FACT TABLE sales"
-          TopLeft="614.285724746938,256.601310788279" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="694.276200957688,153.756864318056">
@@ -1300,10 +1327,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="188,41.6"
-          Id="Package\UPDATE productDetails"
-          TopLeft="344.444450310299,180.130721480514" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="437.536513946981,57.0640525044592">
@@ -1326,14 +1349,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\CLEAR MYSQL DB"
-          TopLeft="361.111117260797,425.686280479893" />
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\TRUNCATE Staging tbales"
-          TopLeft="335.714291431466,340.810461186574" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="136.006350044328,295.652291144687">
@@ -1503,6 +1518,28 @@
           Id="Package\Data Flow Task\Source_productDetails"
           TopLeft="73.571429824343,289.928110174655" />
         <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Output2]"
+          TopLeft="257.571429824343,311.875169014271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="204.571435188761,0"
+              Start="0,0"
+              End="197.071435188761,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="197.071435188761,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Data Flow Task.Paths[ADO NET Source Output1]"
           TopLeft="259.419049366641,184.446407578066">
           <EdgeLayout.Curve>
@@ -1546,28 +1583,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[ADO NET Source Output2]"
-          TopLeft="257.571429824343,311.875169014271">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="204.571435188761,0"
-              Start="0,0"
-              End="197.071435188761,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="197.071435188761,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -1589,6 +1604,30 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SQL Server Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Source_products">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Source_productDetails">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
