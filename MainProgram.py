@@ -160,7 +160,7 @@ def start(branch, file_path):
     mydb = mysql.connector.connect(
       host="localhost",
       user="root",
-      password="dev123"
+      password=""
     )
 
     print(mydb)
@@ -174,7 +174,7 @@ def start(branch, file_path):
       `id` INT NOT NULL AUTO_INCREMENT,
       `name` VARCHAR(500) NULL,
       `quantity` FLOAT NULL,
-      `value` FLOAT NULL,
+      `value` DECIMAL(16,2) NULL,
       PRIMARY KEY (`id`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = greek;
@@ -186,10 +186,10 @@ def start(branch, file_path):
       `id` INT NOT NULL AUTO_INCREMENT,
       `branch` VARCHAR(500) NULL,
       `date` DATETIME NULL,
-      `income` FLOAT NULL,
-      `expenses` FLOAT NULL,
-      `cash` FLOAT NULL,
-      `creditCard` FLOAT NULL,
+      `income` DECIMAL(16,2) NULL,
+      `expenses` DECIMAL(16,2) NULL,
+      `cash` DECIMAL(16,2) NULL,
+      `creditCard` DECIMAL(16,2) NULL,
       PRIMARY KEY (`id`))
       ENGINE = InnoDB
       DEFAULT CHARACTER SET = greek;

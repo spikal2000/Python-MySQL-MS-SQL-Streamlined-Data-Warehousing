@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
-    <Name>IntegrationService__Mysql_MssqlDW</Name>
-    <LastWriteTime>2022-03-02T09:45:50.5979999Z</LastWriteTime>
+    <Name>Integration Service</Name>
+    <LastWriteTime>2022-03-26T20:51:53.1434933Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>Package.dtsx</Name>
-      <LastWriteTime>2022-03-10T13:00:58.7609395Z</LastWriteTime>
+      <LastWriteTime>2022-03-27T11:30:56.7449653Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
