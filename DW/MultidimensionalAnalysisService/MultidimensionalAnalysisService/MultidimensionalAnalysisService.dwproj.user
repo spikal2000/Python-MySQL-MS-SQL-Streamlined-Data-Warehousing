@@ -4,7 +4,7 @@
       <Name>Development</Name>
       <Options>
         <TargetServer>localhost</TargetServer>
-        <TargetDatabase>Multidimensional_Mysql_MssqlDW</TargetDatabase>
+        <TargetDatabase>MultidimensionalAnalysisService</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>
           <ObjectType>Current</ObjectType>

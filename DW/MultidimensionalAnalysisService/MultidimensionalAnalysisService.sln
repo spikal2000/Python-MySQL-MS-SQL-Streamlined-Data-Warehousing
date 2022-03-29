@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1778
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Multidimensional", "Multidimensional\Multidimensional.dwproj", "{BBC9B611-8175-4987-8211-7E8E175DA520}"
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "MultidimensionalAnalysisService", "MultidimensionalAnalysisService\MultidimensionalAnalysisService.dwproj", "{6203080C-EADA-4C39-AEC8-72F3BDBE0710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBC9B611-8175-4987-8211-7E8E175DA520}.Development|Default.ActiveCfg = Development
-		{BBC9B611-8175-4987-8211-7E8E175DA520}.Development|Default.Build.0 = Development
-		{BBC9B611-8175-4987-8211-7E8E175DA520}.Development|Default.Deploy.0 = Development
+		{6203080C-EADA-4C39-AEC8-72F3BDBE0710}.Development|Default.ActiveCfg = Development
+		{6203080C-EADA-4C39-AEC8-72F3BDBE0710}.Development|Default.Build.0 = Development
+		{6203080C-EADA-4C39-AEC8-72F3BDBE0710}.Development|Default.Deploy.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C45F6132-72E3-4FE5-919D-4D4D21B24866}
+		SolutionGuid = {F8E7486E-7BEC-48FF-AE36-8D8E7D7DFA01}
 	EndGlobalSection
 EndGlobal
