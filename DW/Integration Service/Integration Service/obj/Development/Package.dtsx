@@ -11,8 +11,8 @@
   DTS:LocaleID="1032"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{4EF9FD36-1CB5-4B90-958D-F5D3AF620583}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{98D22F1D-CE8B-4C49-A3F5-F62197424C3B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1059,6 +1059,23 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\UPDATE date_dim"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{962C6066-6B44-4460-BE1E-BA10AE763445}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UPDATE date_dim"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9AE0F777-C9E7-4641-A171-A486C7797C80}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[date_dim](date_label)&#xA;SELECT DISTINCT date FROM [dbo].[staging_Sales];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\UPDATE productDetails_dim"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -1084,7 +1101,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="UPDATE productName_dim"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1123,7 +1140,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{9AE0F777-C9E7-4641-A171-A486C7797C80}"
-          SQLTask:SqlStatementSource="INSERT INTO [dbo].[sales_fact](id,branch_id,date,income,expenses,cash,creditCard)&#xA;SELECT &#xA;[staging_Sales].[id], &#xA;[branch_dim].[branch_id], &#xA;[staging_Sales].[date],&#xA;[staging_Sales].[income],&#xA;[staging_Sales].[expenses],&#xA;[staging_Sales].[cash],&#xA;[staging_Sales].[creditCard]&#xA;FROM staging_Sales&#xA;INNER JOIN [branch_dim] ON [branch_dim].[branch_label] = [staging_Sales].[branch];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[sales_fact](id,branch_id,date_id,income,expenses,cash,creditCard)&#xA;SELECT &#xA;[staging_Sales].[id], &#xA;[branch_dim].[branch_id], &#xA;[date_dim].[date_id],&#xA;[staging_Sales].[income],&#xA;[staging_Sales].[expenses],&#xA;[staging_Sales].[cash],&#xA;[staging_Sales].[creditCard]&#xA;FROM staging_Sales&#xA;INNER JOIN [branch_dim] ON [branch_dim].[branch_label] = [staging_Sales].[branch]&#xA;INNER JOIN [date_dim] ON [date_dim].[date_label] = [staging_Sales].[date];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1192,6 +1209,22 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 7"
       DTS:To="Package\DELETE mySQL Data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{115537DA-202B-4A93-A51F-CE8AE72DD131}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\UPDATE date_dim" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{517FA4A7-E32D-441E-BCCE-668EBC7E72A7}"
+      DTS:From="Package\UPDATE date_dim"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\UPDATE sales_fact" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1204,19 +1237,39 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
           TopLeft="310.714291005718,3.5527136788005E-15" />
         <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\DELETE mySQL Data"
+          TopLeft="436.607150292519,442.838240509008" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\TRUNCATE staging tables"
+          TopLeft="117.857144864238,442.161770430196" />
+        <NodeLayout
           Size="176,41.6"
           Id="Package\UPDATE branch_dim"
           TopLeft="67.1428582862933,92.529413062396" />
         <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\UPDATE product_dim"
+          TopLeft="299.404767003595,299.310461237219" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\UPDATE productDetails_dim"
+          TopLeft="278.769846017264,373.232030901391" />
+        <NodeLayout
           Size="206.4,41.6"
           Id="Package\UPDATE productName_dim"
           TopLeft="525.000008940697,93.2941189554736" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\UPDATE sales_fact"
+          TopLeft="300.198417810762,226.238564787576" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="362.180957672385,41.6">
@@ -1285,24 +1338,32 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\UPDATE sales_fact"
-          TopLeft="305.555560759136,90.9150339547875" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="243.142858286293,112.522223508592">
+          TopLeft="155.142858286293,134.129413062396">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="62.4127024728425,0"
+              EndConnector="188.855559524468,92.1091517251805"
               Start="0,0"
-              End="54.9127024728425,0">
+              End="188.855559524468,84.6091517251805">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="54.9127024728425,0" />
+                    End="0,56.4421121210761" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,56.4421121210761"
+                    Point2="0,60.4421121210761"
+                    Point3="4,60.4421121210761" />
+                  <mssgle:LineSegment
+                    End="184.855559524468,60.4421121210761" />
+                  <mssgle:CubicBezierSegment
+                    Point1="184.855559524468,60.4421121210761"
+                    Point2="188.855559524468,60.4421121210761"
+                    Point3="188.855559524468,64.4421121210761" />
+                  <mssgle:LineSegment
+                    End="188.855559524468,84.6091517251805" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1313,18 +1374,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="525.000008940697,112.904576455131">
+          TopLeft="628.200008940697,134.894118955474">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-57.0444481815613,0"
+              EndConnector="-204.601591129935,91.3444458321029"
               Start="0,0"
-              End="-49.5444481815613,0">
+              End="-204.601591129935,83.8444458321029">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-49.5444481815613,0" />
+                    End="0,55.9403113937504" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,55.9403113937504"
+                    Point2="0,59.9403113937504"
+                    Point3="-4,59.9403113937504" />
+                  <mssgle:LineSegment
+                    End="-200.601591129935,59.9403113937504" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-200.601591129935,59.9403113937504"
+                    Point2="-204.601591129935,59.9403113937504"
+                    Point3="-204.601591129935,63.9403113937504" />
+                  <mssgle:LineSegment
+                    End="-204.601591129935,83.8444458321029" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1333,24 +1406,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\UPDATE product_dim"
-          TopLeft="304.761909951969,163.98693040443" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="386.358735355552,132.515033954788">
+          TopLeft="382.201592407178,267.838564787577">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.4718964496423"
+              EndConnector="0,31.4718964496425"
               Start="0,0"
-              End="0,23.9718964496423">
+              End="0,23.9718964496425">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.9718964496423" />
+                    End="0,23.9718964496425" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1359,13 +1428,9 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="211.2,41.6"
-          Id="Package\UPDATE productDetails_dim"
-          TopLeft="284.126988965638,237.908500068603" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="387.844449458803,205.58693040443">
+          TopLeft="382.487306510429,340.910461237219">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1385,13 +1450,9 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\TRUNCATE staging tables"
-          TopLeft="123.214287812612,306.838239597408" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="389.726988965638,279.508500068603">
+          TopLeft="384.369846017264,414.832030901391">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1402,9 +1463,9 @@
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9.6648697644026" />
+                    End="0,9.66486976440262" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,9.6648697644026"
+                    Point1="0,9.66486976440262"
                     Point2="0,13.6648697644026"
                     Point3="-4,13.6648697644026" />
                   <mssgle:LineSegment
@@ -1423,13 +1484,9 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package\DELETE mySQL Data"
-          TopLeft="441.964293240893,307.51470967622" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="285.614287812612,327.976474636814">
+          TopLeft="280.257144864238,463.300005469602">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1441,6 +1498,54 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="148.850005428281,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\UPDATE date_dim"
+          TopLeft="305.357148057344,94.6323542683595" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="386.235719531531,41.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.0323542683595"
+              Start="0,0"
+              End="0,45.5323542683595">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5323542683595" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="385.177782934053,136.23235426836">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90.006210519217"
+              Start="0,0"
+              End="0,82.506210519217">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.506210519217" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

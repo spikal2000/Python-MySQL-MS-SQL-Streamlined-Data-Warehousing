@@ -140,8 +140,9 @@ def start(branch, file_path):
     #----parse strings to float numbers and date to DateTime before insert the values in mysql DB----
     #print(float(money[0].replace(',','.')))
     #branch = "Ελληνικό"
-    datedtr = " ".join(x)
-    date_time = datetime.strptime(datedtr, '%d.%m.%Y %H:%M:%S')  # DATE
+    # datedtr = " ".join(x)
+    # print(x[0])
+    date_time = datetime.strptime(x[0], '%d.%m.%Y')  # DATE %d.%m.%Y %H:%M:%S
     income = float(money[0].replace(',', '.')) # INCOME
     expenses = float(money[1].replace(',', '.')) # EXPENSES
     i_cash = float(cs.replace(',', '.')) # CASH
@@ -185,7 +186,7 @@ def start(branch, file_path):
     CREATE TABLE IF NOT EXISTS `maindb`.`sales` (
       `id` INT NOT NULL AUTO_INCREMENT,
       `branch` VARCHAR(500) NULL,
-      `date` DATETIME NULL,
+      `date` DATE NULL,
       `income` DECIMAL(16,2) NULL,
       `expenses` DECIMAL(16,2) NULL,
       `cash` DECIMAL(16,2) NULL,
