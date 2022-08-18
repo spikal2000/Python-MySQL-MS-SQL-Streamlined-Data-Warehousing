@@ -1,5 +1,7 @@
----------------PRODUCTS TABLE-----------------
-    CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`products` (
+CREATE DATABASE `main_db`;
+
+-- -------------PRODUCTS TABLE-----------------
+    CREATE TABLE IF NOT EXISTS `main_db`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(500) NULL,
   `quantity` FLOAT NULL,
@@ -10,8 +12,8 @@ DEFAULT CHARACTER SET = greek;
 
 
 
---------------SALES TABLE--------------------
-CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`sales` (
+-- ------------SALES TABLE--------------------
+CREATE TABLE IF NOT EXISTS `main_db`.`sales` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `branch` VARCHAR(500) NULL,
   `date` DATETIME NULL,
@@ -24,20 +26,20 @@ CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`sales` (
   DEFAULT CHARACTER SET = greek;
 
 
--------------------ProductDetails--------------
-CREATE TABLE IF NOT EXISTS `kalogeri_maindb`.`productDetails` (
+-- -----------------ProductDetails--------------
+CREATE TABLE IF NOT EXISTS `main_db`.`productDetails` (
   `sales_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   INDEX `FK_sales_id__productDeatils_sales_id_idx` (`sales_id` ASC),
   INDEX `FK_products_id__productDetails_products_id_idx` (`product_id` ASC),
   CONSTRAINT `FK_sales_id__productDeatils_sales_id`
     FOREIGN KEY (`sales_id`)
-    REFERENCES `kalogeri_maindb`.`sales` (`id`)
+    REFERENCES `main_db`.`sales` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_products_id__productDetails_products_id`
     FOREIGN KEY (`product_id`)
-    REFERENCES `kalogeri_maindb`.`products` (`id`)
+    REFERENCES `main_db`.`products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB

@@ -10,53 +10,53 @@ import mysql.connector
 
 root = Tk()
 root.geometry("500x300")
-root.title("DataCollect")
+root.title("DataEntry")
 
-def ellhniko():
+def branch_1():
     global branch
-    branch = "Ελληνικό"
+    branch = "branch_1"
     global file_path
     file_path = filedialog.askopenfilename()
     start(branch, file_path)
     root.config(bg = 'green')
-    root.after(6000, lambda: root.config(bg = "white"))
-    ButtonEllhniko.config(state=DISABLED)#ACTIVE
+    root.after(4000, lambda: root.config(bg = "white"))
+    Button1.config(state=DISABLED)#ACTIVE
 
-def falhro():
+def branch_2():
     global branch
-    branch = "Π.Φάληρο"
+    branch = "branch_2"
     global file_path
     file_path = filedialog.askopenfilename()
     start(branch, file_path)
     root.config(bg = 'green')
-    root.after(6000, lambda: root.config(bg = "white"))
-    ButtonFalhro.config(state=DISABLED)
+    root.after(4000, lambda: root.config(bg = "white"))
+    Button2.config(state=DISABLED)
 
-def boula():
+def branch_3():
     global branch
-    branch = "Βούλα"
+    branch = "branch_3"
     global file_path
     file_path = filedialog.askopenfilename()
     start(branch, file_path)
     root.config(bg = 'green')
-    root.after(6000, lambda: root.config(bg = "white"))
-    ButtonBoula.config(state=DISABLED)
+    root.after(4000, lambda: root.config(bg = "white"))
+    Button3.config(state=DISABLED)
 
 # Buttons and Button Style
-ButtonEllhniko = Button(root, text="Ελληνικό", command = ellhniko)
-ButtonEllhniko.config(font=('Ink Free', 20, 'bold'))
-ButtonEllhniko.config(bg='#bf9000')
-ButtonEllhniko.pack()
+Button1 = Button(root, text="Branch_1", command = branch_1)
+Button1.config(font=('Ink Free', 20, 'bold'))
+Button1.config(bg='#bf9000')
+Button1.pack()
 
-ButtonFalhro = Button(root, text="Π.Φάληρο", command = falhro)
-ButtonFalhro.config(font=('Ink Free', 20, 'bold'))
-ButtonFalhro.config(bg='#bf9000')
-ButtonFalhro.pack()
+Button2 = Button(root, text="Branch_2", command = branch_2)
+Button2.config(font=('Ink Free', 20, 'bold'))
+Button2.config(bg='#bf9000')
+Button2.pack()
 
-ButtonBoula = Button(root, text="Βούλα", command = boula)
-ButtonBoula.config(font=('Ink Free', 20, 'bold'))
-ButtonBoula.config(bg='#bf9000')
-ButtonBoula.pack()
+Button3 = Button(root, text="Branch_3", command = branch_3)
+Button3.config(font=('Ink Free', 20, 'bold'))
+Button3.config(bg='#bf9000')
+Button3.pack()
 
 def start(branch, file_path):
     print(file_path)
@@ -171,7 +171,7 @@ def start(branch, file_path):
 
     mycursor.execute("""
 
-        CREATE TABLE IF NOT EXISTS `maindb`.`products` (
+        CREATE TABLE IF NOT EXISTS `main_db`.`products` (
       `id` INT NOT NULL AUTO_INCREMENT,
       `name` VARCHAR(500) NULL,
       `quantity` FLOAT NULL,
@@ -183,7 +183,7 @@ def start(branch, file_path):
 
     mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `maindb`.`sales` (
+    CREATE TABLE IF NOT EXISTS `main_db`.`sales` (
       `id` INT NOT NULL AUTO_INCREMENT,
       `branch` VARCHAR(500) NULL,
       `date` DATE NULL,
@@ -200,19 +200,19 @@ def start(branch, file_path):
 
     mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `maindb`.`productDetails` (
+    CREATE TABLE IF NOT EXISTS `main_db`.`productDetails` (
       `sales_id` INT NOT NULL,
       `product_id` INT NOT NULL,
       INDEX `FK_sales_id__productDeatils_sales_id_idx` (`sales_id` ASC),
       INDEX `FK_products_id__productDetails_products_id_idx` (`product_id` ASC),
       CONSTRAINT `FK_sales_id__productDeatils_sales_id`
         FOREIGN KEY (`sales_id`)
-        REFERENCES `maindb`.`sales` (`id`)
+        REFERENCES `main_db`.`sales` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT `FK_products_id__productDetails_products_id`
         FOREIGN KEY (`product_id`)
-        REFERENCES `maindb`.`products` (`id`)
+        REFERENCES `main_db`.`products` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
         ENGINE = InnoDB
@@ -224,20 +224,20 @@ def start(branch, file_path):
 
     mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `maindb`.`Dproduct_id` (
+    CREATE TABLE IF NOT EXISTS `main_db`.`Dproduct_id` (
       `product_id` INT NOT NULL);
 
     """)
 
     mycursor.execute("""
 
-    CREATE TABLE IF NOT EXISTS `maindb`.`Dsales_id` (
+    CREATE TABLE IF NOT EXISTS `main_db`.`Dsales_id` (
       `sales_id` INT NOT NULL);
 
     """)
 
     mycursor.execute("""
-        INSERT INTO `maindb`.`sales`(`branch`, `Date`, `income`, `expenses`,
+        INSERT INTO `main_db`.`sales`(`branch`, `Date`, `income`, `expenses`,
         `cash`, `creditCard`)
         VALUES(%s, %s, %s, %s, %s, %s)
     """, (branch, date_time, income, expenses, i_cash, credit_card))
@@ -247,7 +247,7 @@ def start(branch, file_path):
 
     mycursor.execute("""
 
-        INSERT INTO `maindb`.`Dsales_id`(`sales_id`)
+        INSERT INTO `main_db`.`Dsales_id`(`sales_id`)
         VALUES ( %s )
 
     """,(sales_id,))
@@ -260,14 +260,14 @@ def start(branch, file_path):
         value1 = values_num[i]
 
         mycursor.execute("""
-            INSERT INTO `maindb`.`products`(`name`, `quantity`, `value`)
+            INSERT INTO `main_db`.`products`(`name`, `quantity`, `value`)
             VALUES (%s, %s, %s); """, (name1, quantity1, value1) )
 
         mydb.commit()
         product_id = mycursor.lastrowid
         mycursor.execute("""
 
-            INSERT INTO `maindb`.`productDetails`(`sales_id`, `product_id`)
+            INSERT INTO `main_db`.`productDetails`(`sales_id`, `product_id`)
             VALUES ( %s, %s )
 
             """, (sales_id, product_id))
@@ -275,7 +275,7 @@ def start(branch, file_path):
 
         mycursor.execute("""
 
-            INSERT INTO `maindb`.`Dproduct_id`(`product_id`)
+            INSERT INTO `main_db`.`Dproduct_id`(`product_id`)
             VALUES ( %s )
 
         """,(product_id,))

@@ -1,4 +1,4 @@
-USE kalogeri_maindb;
+USE main_db;
 DELETE FROM productDetails WHERE product_id IN (SELECT product_id FROM Dproduct_id) ;
 DELETE FROM products WHERE id IN (SELECT product_id FROM Dproduct_id) ;
 DELETE FROM sales WHERE id IN (SELECT sales_id FROM Dsales_id) ;
