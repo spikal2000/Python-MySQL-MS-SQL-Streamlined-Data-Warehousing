@@ -11,8 +11,8 @@
   DTS:LocaleID="1032"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{49FA99AD-1A70-4A38-B822-F2F126C07732}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{C80AEF90-BBA1-4AD9-B873-522834BE4B13}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,6 +29,18 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3A6769C4-D4A4-4547-8403-23733663093E}"
+      DTS:ObjectName="DESKTOP-RE433V8.mainDW 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-RE433V8;Initial Catalog=mainDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[localhost.maindb.root 1]"
       DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=8.0.28.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
       DTS:DTSID="{1FEAE1DD-11C0-4BCD-9947-1B7E332300FA}"
@@ -36,6 +48,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="server=localhost;user id=root;port=3306;database=maindb;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.main_db.root]"
+      DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=8.0.28.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
+      DTS:DTSID="{886615E7-46F6-42ED-A23B-6BE14A56D862}"
+      DTS:ObjectName="localhost.main_db.root">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=localhost;user id=root;port=3306;database=main_db;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -96,8 +118,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\ADO NET Source.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root 1]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.main_db.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.main_db.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -136,47 +158,39 @@
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[income]"
-                      dataType="numeric"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[income]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[income]"
                       name="income"
-                      precision="16"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[expenses]"
-                      dataType="numeric"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[expenses]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[expenses]"
                       name="expenses"
-                      precision="16"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[cash]"
-                      dataType="numeric"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[cash]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[cash]"
                       name="cash"
-                      precision="16"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[creditCard]"
-                      dataType="numeric"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[creditCard]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[creditCard]"
                       name="creditCard"
-                      precision="16"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -196,28 +210,20 @@
                       name="date" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[income]"
-                      dataType="numeric"
-                      name="income"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="income" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[expenses]"
-                      dataType="numeric"
-                      name="expenses"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="expenses" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[cash]"
-                      dataType="numeric"
-                      name="cash"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="cash" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[creditCard]"
-                      dataType="numeric"
-                      name="creditCard"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="creditCard" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -243,32 +249,24 @@
                       name="date" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[income]"
-                      dataType="numeric"
+                      dataType="r4"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[income]"
-                      name="income"
-                      precision="16"
-                      scale="2" />
+                      name="income" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[expenses]"
-                      dataType="numeric"
+                      dataType="r4"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[expenses]"
-                      name="expenses"
-                      precision="16"
-                      scale="2" />
+                      name="expenses" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[cash]"
-                      dataType="numeric"
+                      dataType="r4"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[cash]"
-                      name="cash"
-                      precision="16"
-                      scale="2" />
+                      name="cash" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[creditCard]"
-                      dataType="numeric"
+                      dataType="r4"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[creditCard]"
-                      name="creditCard"
-                      precision="16"
-                      scale="2" />
+                      name="creditCard" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -327,8 +325,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\ADO NET Source 1.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root 1]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.main_db.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.main_db.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -367,14 +365,12 @@
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[value]"
-                      dataType="numeric"
+                      dataType="r4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[value]"
                       lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[value]"
                       name="value"
-                      precision="16"
-                      scale="2"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -394,10 +390,8 @@
                       name="quantity" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[value]"
-                      dataType="numeric"
-                      name="value"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="value" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -423,11 +417,9 @@
                       name="quantity" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[value]"
-                      dataType="numeric"
+                      dataType="r4"
                       lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[value]"
-                      name="value"
-                      precision="16"
-                      scale="2" />
+                      name="value" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -486,8 +478,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\ADO NET Source 1 1.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.maindb.root 1]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.maindb.root 1]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.main_db.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.main_db.root]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -579,7 +571,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName">[staging_Sales]</property>
+                  name="BulkInsertTableName">[staging_sales]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -632,8 +624,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\SQL Server Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -664,34 +656,26 @@
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[date]" />
                     <inputColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[income]"
-                      cachedDataType="numeric"
+                      cachedDataType="r4"
                       cachedName="income"
-                      cachedPrecision="16"
-                      cachedScale="2"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[income]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[income]" />
                     <inputColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[expenses]"
-                      cachedDataType="numeric"
+                      cachedDataType="r4"
                       cachedName="expenses"
-                      cachedPrecision="16"
-                      cachedScale="2"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[expenses]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[expenses]" />
                     <inputColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[cash]"
-                      cachedDataType="numeric"
+                      cachedDataType="r4"
                       cachedName="cash"
-                      cachedPrecision="16"
-                      cachedScale="2"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[cash]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[cash]" />
                     <inputColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[creditCard]"
-                      cachedDataType="numeric"
+                      cachedDataType="r4"
                       cachedName="creditCard"
-                      cachedPrecision="16"
-                      cachedScale="2"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[creditCard]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[creditCard]" />
                   </inputColumns>
@@ -712,28 +696,20 @@
                       name="date" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[income]"
-                      dataType="numeric"
-                      name="income"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="income" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[expenses]"
-                      dataType="numeric"
-                      name="expenses"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="expenses" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[cash]"
-                      dataType="numeric"
-                      name="cash"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="cash" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[creditCard]"
-                      dataType="numeric"
-                      name="creditCard"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="creditCard" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -811,8 +787,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\SQL Server Destination 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -843,10 +819,8 @@
                       lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[quantity]" />
                     <inputColumn
                       refId="Package\Data Flow Task\SQL Server Destination 1.Inputs[SQL Server Destination Input].Columns[value]"
-                      cachedDataType="numeric"
+                      cachedDataType="r4"
                       cachedName="value"
-                      cachedPrecision="16"
-                      cachedScale="2"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination 1.Inputs[SQL Server Destination Input].ExternalColumns[value]"
                       lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[value]" />
                   </inputColumns>
@@ -867,10 +841,8 @@
                       name="quantity" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination 1.Inputs[SQL Server Destination Input].ExternalColumns[value]"
-                      dataType="numeric"
-                      name="value"
-                      precision="16"
-                      scale="2" />
+                      dataType="r4"
+                      name="value" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -895,7 +867,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName">[dbo].[staging_productDetails]</property>
+                  name="BulkInsertTableName">[staging_productDetails]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -948,8 +920,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\SQL Server Destination 2.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-RE433V8.mainDW 1]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1020,8 +992,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{1FEAE1DD-11C0-4BCD-9947-1B7E332300FA}"
-          SQLTask:SqlStatementSource="USE maindb;&#xA;DELETE FROM productDetails WHERE product_id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM products WHERE id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM sales WHERE id IN (SELECT sales_id FROM Dsales_id) ;&#xA;TRUNCATE TABLE Dproduct_id;&#xA;TRUNCATE TABLE Dsales_id;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{886615E7-46F6-42ED-A23B-6BE14A56D862}"
+          SQLTask:SqlStatementSource="USE main_db;&#xA;DELETE FROM productDetails WHERE product_id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM products WHERE id IN (SELECT product_id FROM Dproduct_id) ;&#xA;DELETE FROM sales WHERE id IN (SELECT sales_id FROM Dsales_id) ;&#xA;TRUNCATE TABLE Dproduct_id;&#xA;TRUNCATE TABLE Dsales_id;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1050,7 +1022,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="UPDATE branch_dim"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1067,7 +1039,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="UPDATE date_dim"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1140,7 +1112,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{9AE0F777-C9E7-4641-A171-A486C7797C80}"
-          SQLTask:SqlStatementSource="INSERT INTO [dbo].[sales_fact](id,branch_id,date_id,income,expenses,cash,creditCard)&#xA;SELECT &#xA;[staging_Sales].[id], &#xA;[branch_dim].[branch_id], &#xA;[date_dim].[date_id],&#xA;[staging_Sales].[income],&#xA;[staging_Sales].[expenses],&#xA;[staging_Sales].[cash],&#xA;[staging_Sales].[creditCard]&#xA;FROM staging_Sales&#xA;INNER JOIN [branch_dim] ON [branch_dim].[branch_label] = [staging_Sales].[branch]&#xA;INNER JOIN [date_dim] ON [date_dim].[date_label] = [staging_Sales].[date];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[sales_fact](id,branch_id,date_id,income,expenses,cash,creditCard)&#xA;SELECT &#xA;[staging_sales].[id], &#xA;[branch_dim].[branch_id], &#xA;[date_dim].[date_id],&#xA;[staging_sales].[income],&#xA;[staging_sales].[expenses],&#xA;[staging_sales].[cash],&#xA;[staging_sales].[creditCard]&#xA;FROM staging_sales&#xA;INNER JOIN [branch_dim] ON [branch_dim].[branch_label] = [staging_sales].[branch]&#xA;INNER JOIN [date_dim] ON [date_dim].[date_label] = [staging_sales].[date];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1259,7 +1231,7 @@
           Id="Package\UPDATE date_dim"
           TopLeft="305.357148057344,94.6323542683595" />
         <NodeLayout
-          Size="162.4,41.6"
+          Size="179.2,41.6"
           Id="Package\UPDATE product_dim"
           TopLeft="299.404767003595,299.310461237219" />
         <NodeLayout
@@ -1412,18 +1384,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="382.201592407178,267.838564787577">
+          TopLeft="386.401592407179,267.838564787576">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.4718964496425"
+              EndConnector="0,31.471896449643"
               Start="0,0"
-              End="0,23.9718964496425">
+              End="0,23.971896449643">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.9718964496425" />
+                    End="0,23.971896449643" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1434,18 +1406,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="382.487306510429,340.910461237219">
+          TopLeft="386.687306510429,340.910461237219">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32.3215696641731"
+              EndConnector="0,32.321569664172"
               Start="0,0"
-              End="0,24.8215696641731">
+              End="0,24.821569664172">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.8215696641731" />
+                    End="0,24.821569664172" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1581,7 +1553,7 @@
         <NodeLayout
           Size="157.6,41.6"
           Id="Package\Data Flow Task\ADO NET Source"
-          TopLeft="83.5714299946415,94.0588248485513" />
+          TopLeft="82.8571442681916,93.2941189554736" />
         <NodeLayout
           Size="166.4,41.6"
           Id="Package\Data Flow Task\ADO NET Source 1"
@@ -1632,18 +1604,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
-          TopLeft="241.171429994642,115.24117779509">
+          TopLeft="240.457144268192,114.858824848551">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="260.971435699658,0"
+              EndConnector="261.685721426107,0"
               Start="0,0"
-              End="253.471435699658,0">
+              End="254.185721426107,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="253.471435699658,0" />
+                    End="254.185721426107,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
