@@ -11,3 +11,4 @@ Key Features:
     Storing collected data in a MySQL database
     Creating a data warehouse using Microsoft SQL
     Weekly data transfer to the data warehouse with SSIS
+    Visualization using power BI
